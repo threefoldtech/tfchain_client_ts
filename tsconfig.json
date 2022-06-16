@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "lib": ["ES2017", "DOM"],
+        "types": ["jest"],
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "Node",
+        "baseUrl": "./src",
+        "paths": {
+            "@utils/*": ["utils/*"],
+            "@modules/*": ["modules/*"],
+            "@tf-types/*": ["types/*"]
+        }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
