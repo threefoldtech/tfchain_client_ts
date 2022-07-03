@@ -1,6 +1,6 @@
 import ClientModel from "@tf-types/clientModel";
 
-export default abstract class {
+export default abstract class Voting {
   listValidators(this: ClientModel) {
     return this.api.query.tftBridgeModule
       .validators()

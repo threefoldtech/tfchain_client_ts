@@ -1,7 +1,7 @@
 import ClientModel from "@tf-types/clientModel";
 import { hex2a, validateID } from "@utils/index";
 
-export default abstract class {
+export default abstract class Farm {
   createFarm(
     this: ClientModel,
     name: string,

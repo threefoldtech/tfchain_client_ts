@@ -1,7 +1,7 @@
 import ClientModel from "@tf-types/clientModel";
 import { validateID, hex2a } from "@utils/index";
 
-export default abstract class {
+export default abstract class Entity {
   createEntity(
     this: ClientModel,
     target: string,

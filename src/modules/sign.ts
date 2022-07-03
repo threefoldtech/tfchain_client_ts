@@ -1,7 +1,7 @@
 import ClientModel from "@tf-types/clientModel";
 import { Buffer } from "buffer";
 
-export default abstract class {
+export default abstract class Sign {
   signEntityTwinID(this: ClientModel, entityID: string, twinID: string) {
     const _entityId = parseInt(entityID);
     const _twinId = parseInt(twinID);

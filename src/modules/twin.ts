@@ -1,7 +1,7 @@
 import { ClientModel } from "@tf-types/index";
 import { validateID, hex2a, parseTwinIp } from "@utils/index";
 
-export default abstract class {
+export default abstract class Twin {
   createTwin(this: ClientModel, ip: string) {
     return this.api.rpc.system.accountNextIndex(this.address).then((nonce) => {
       return this.api.tx.tfgridModule

@@ -1,7 +1,7 @@
 import ClientModel from "@tf-types/clientModel";
 import { hex2a } from "@utils/index";
 
-export default abstract class {
+export default abstract class TfkvStore {
   tfStoreSet(this: ClientModel, key: string, value: string) {
     return this.api.rpc.system.accountNextIndex(this.address).then((nonce) => {
       return this.api.tx.tfkvStore

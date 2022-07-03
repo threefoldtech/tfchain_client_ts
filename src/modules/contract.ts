@@ -2,7 +2,7 @@ import type { AnyJson } from "@polkadot/types/types";
 import { ClientModel } from "@tf-types/index";
 import { validateID } from "@utils/index";
 
-export default abstract class {
+export default abstract class Contract {
   createNodeContract<T = unknown, H = unknown>(
     this: ClientModel,
     nodeID: number,

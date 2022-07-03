@@ -1,6 +1,6 @@
 import ClientModel from "@tf-types/clientModel";
 
-export default abstract class {
+export default abstract class Balance {
   getBalance(this: ClientModel, address: string) {
     return this.api.query.system
       .account(address)
