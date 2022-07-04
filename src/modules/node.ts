@@ -1,5 +1,5 @@
 import ClientModel from "@tf-types/clientModel";
-import { validateID, hex2a } from "@utils/index";
+import { validateID } from "@utils/index";
 
 export default abstract class Node {
   createNode(
@@ -58,24 +58,9 @@ export default abstract class Node {
     let _id = validateID(id);
     return this.api.query.tfgridModule
       .nodes(_id)
-      .then((res) => res.toJSON())
+      .then((res) => res.toHuman())
       .then((node) => {
         if (node["id"] !== _id) throw Error("No such node");
-
-        const location = node["location"];
-        const { longitude = "", latitude = "" } = location;
-        location["longitude"] = hex2a(longitude);
-        location["latitude"] = hex2a(latitude);
-
-        const publicConfig = node["public_config"];
-        if (publicConfig) {
-          const { ipv4, ipv6, gw4, gw6 } = publicConfig;
-          publicConfig.ipv4 = hex2a(ipv4);
-          publicConfig.ipv6 = hex2a(ipv6);
-          publicConfig.gw4 = hex2a(gw4);
-          publicConfig.gw6 = hex2a(gw6);
-        }
-
         return node;
       });
   }
@@ -83,12 +68,12 @@ export default abstract class Node {
   getNodeIDByPubkey(this: ClientModel, pubkey: string) {
     return this.api.query.tfgridModule
       .nodesByPubkeyID(pubkey)
-      .then((res) => res.toJSON());
+      .then((res) => res.toHuman());
   }
 
   listNodes(this: ClientModel) {
     return this.api.query.tfgridModule.nodes.entries().then((nodes) => {
-      return nodes.map(([_, node]) => node.toJSON());
+      return nodes.map(([_, node]) => node.toHuman());
     });
   }
 

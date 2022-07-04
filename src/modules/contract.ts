@@ -85,6 +85,6 @@ export default abstract class Contract {
   }
 
   private __getSMObj(this: ClientModel, cb: Function): Promise<AnyJson> {
-    return cb(this.api.query.smartContractModule).then((res) => res.toJSON());
+    return cb(this.api.query.smartContractModule).then((res) => res.toHuman());
   }
 }

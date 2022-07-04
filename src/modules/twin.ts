@@ -1,5 +1,5 @@
 import { ClientModel } from "@tf-types/index";
-import { validateID, hex2a, parseTwinIp } from "@utils/index";
+import { validateID } from "@utils/index";
 
 export default abstract class Twin {
   createTwin(this: ClientModel, ip: string) {
@@ -35,10 +35,9 @@ export default abstract class Twin {
     const _id = validateID(id);
     return this.api.query.tfgridModule
       .twins(_id)
-      .then(parseTwinIp)
+      .then((twin) => twin.toHuman())
       .then((res) => {
         if (res["id"] !== id) throw new Error("No such twin");
-        res["ip"] = hex2a(res["ip"]);
         return res;
       });
   }
@@ -46,7 +45,7 @@ export default abstract class Twin {
   getTwinIdByAccountId(this: ClientModel, accountId: number) {
     return this.api.query.tfgridModule
       .twinIdByAccountID(accountId)
-      .then((res) => res.toJSON())
+      .then((res) => res.toHuman())
       .then((twin_id: number) => {
         if (twin_id === 0)
           throw new Error(
@@ -58,7 +57,7 @@ export default abstract class Twin {
 
   listTwins(this: ClientModel) {
     return this.api.query.tfgridModule.twins.entries().then((twins) => {
-      return twins.map(([_, twin]) => parseTwinIp(twin));
+      return twins.map(([_, twin]) => twin.toHuman());
     });
   }
 

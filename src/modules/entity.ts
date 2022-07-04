@@ -1,5 +1,5 @@
 import ClientModel from "@tf-types/clientModel";
-import { validateID, hex2a } from "@utils/index";
+import { validateID } from "@utils/index";
 
 export default abstract class Entity {
   createEntity(
@@ -35,10 +35,9 @@ export default abstract class Entity {
 
     return this.api.query.tfgridModule
       .entities(_id)
-      .then((res) => res.toJSON())
+      .then((res) => res.toHuman())
       .then((entity) => {
         if (entity["id"] !== _id) throw Error("No such entity");
-        entity["name"] = hex2a(entity["name"]);
         return entity;
       });
   }
@@ -46,22 +45,18 @@ export default abstract class Entity {
   getEntityIDByName(this: ClientModel, name: string) {
     return this.api.query.tfgridModule
       .entitiesByNameID(name)
-      .then((res) => res.toJSON());
+      .then((res) => res.toHuman());
   }
 
   getEntityIDByPubkey(this: ClientModel, pubkey: string) {
     return this.api.query.tfgridModule
       .entitiesByPubkeyID(pubkey)
-      .then((res) => res.toJSON());
+      .then((res) => res.toHuman());
   }
 
   listEntities(this: ClientModel) {
     return this.api.query.tfgridModule.entities.entries().then((entities) => {
-      return entities.map(([_, entity]) => {
-        const parsedEntity = entity.toJSON();
-        parsedEntity["name"] = hex2a(parsedEntity["name"]);
-        return parsedEntity;
-      });
+      return entities.map(([_, entity]) => entity.toHuman());
     });
   }
 

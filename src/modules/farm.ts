@@ -1,5 +1,5 @@
 import ClientModel from "@tf-types/clientModel";
-import { hex2a, validateID } from "@utils/index";
+import { validateID } from "@utils/index";
 
 export default abstract class Farm {
   createFarm(
@@ -20,17 +20,9 @@ export default abstract class Farm {
     const _id = validateID(id);
     return this.api.query.tfgridModule
       .farms(_id)
-      .then((farm) => farm.toJSON())
+      .then((farm) => farm.toHuman())
       .then((res) => {
         if (res["id"] !== _id) throw Error("No such farm");
-        res["name"] = hex2a(res["name"]);
-        res["public_ips"] = res["public_ips"].map((ip) => {
-          return {
-            ip: hex2a(ip.ip),
-            gateway: hex2a(ip.gateway),
-            contract_id: ip.contract_id,
-          };
-        });
         return res;
       });
   }
@@ -49,11 +41,7 @@ export default abstract class Farm {
 
   listFarms(this: ClientModel) {
     return this.api.query.tfgridModule.farms.entries().then((farms) => {
-      return farms.map(([_, farm]) => {
-        const parsedFarm = farm.toJSON();
-        parsedFarm["name"] = hex2a(parsedFarm["name"]);
-        return parsedFarm;
-      });
+      return farms.map(([_, farm]) => farm.toHuman());
     });
   }
 

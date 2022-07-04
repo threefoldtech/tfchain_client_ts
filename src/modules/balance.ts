@@ -7,10 +7,10 @@ export default abstract class Balance {
       .then((res) => res["data"])
       .then((balance) => {
         return {
-          free: balance.free.toJSON(),
-          reserved: balance.reserved.toJSON(),
-          miscFrozen: balance.miscFrozen.toJSON(),
-          feeFrozen: balance.feeFrozen.toJSON(),
+          free: balance.free.toHuman(),
+          reserved: balance.reserved.toHuman(),
+          miscFrozen: balance.miscFrozen.toHuman(),
+          feeFrozen: balance.feeFrozen.toHuman(),
         };
       });
   }

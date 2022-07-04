@@ -4,7 +4,7 @@ export default abstract class Voting {
   listValidators(this: ClientModel) {
     return this.api.query.tftBridgeModule
       .validators()
-      .then((res) => res.toJSON());
+      .then((res) => res.toHuman());
   }
 
   proposeTransaction(

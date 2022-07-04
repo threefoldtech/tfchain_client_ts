@@ -1,5 +1,4 @@
 import ClientModel from "@tf-types/clientModel";
-import { hex2a } from "@utils/index";
 
 export default abstract class TfkvStore {
   tfStoreSet(this: ClientModel, key: string, value: string) {
@@ -12,12 +11,12 @@ export default abstract class TfkvStore {
 
   tfStoreGet(this: ClientModel, key: string) {
     return this.api.query.tfkvStore
-      .tFKVStore(this.address, key)
-      .then((value) => hex2a(value.toString()));
+      .tfkvStore(this.address, key)
+      .then((value) => value.toHuman());
   }
 
   tfStoreList(this: ClientModel) {
-    return this.api.query.tfkvStore.tFKVStore
+    return this.api.query.tfkvStore.tfkvStore
       .keys(this.address)
       .then((keys) => {
         return keys.map((k) => k.toHuman()[1]);
