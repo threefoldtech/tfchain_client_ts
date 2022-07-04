@@ -1,5 +1,5 @@
 {
-  "name": "tfgrid-client",
+  "name": "tfchain_client_ts",
   "version": "1.0.0",
   "description": "Typescript api for communicating with threefold grid",
   "source": "src/client.ts",
@@ -16,7 +16,10 @@
     "tf",
     "tfgrid",
     "tfgrid-client",
-    "ts-tfgrid-client"
+    "ts-tfgrid-client",
+    "tfchain_client_ts",
+    "tfchain",
+    "threefold"
   ],
   "author": "Mohamed Elmdary<engm5081@gmail.com>",
   "license": "MIT",
